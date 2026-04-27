@@ -3,10 +3,11 @@ import sys
 import pygame
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from starfield import Starfield
 from player import Player
 from shot import Shot
 
-from constants import ASTEROID_MAX_RADIUS, PLAYER_RADIUS, SCREEN_WIDTH, SCREEN_HEIGHT 
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT 
 from logger import log_event
 from logger import log_state
 
@@ -31,6 +32,8 @@ def main():
     Shot.containers = (shots, updatable, drawable) 
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
+
+    starfield = Starfield()
 
     asteroidField = AsteroidField()
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
@@ -62,6 +65,8 @@ def main():
                     shot.kill()
 
         screen.fill("black")
+
+        starfield.draw(screen)
 
         for sprite in drawable:
             sprite.draw(screen)

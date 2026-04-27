@@ -34,6 +34,7 @@ class Player(CircleShape):
             self.shot_cd_timer = PLAYER_SHOOT_COOLDOWN_SECONDS
 
     def draw(self, screen):
+        pygame.draw.polygon(screen, "black", self.triangle(), 0)
         pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH)
     
     def update(self, dt):
