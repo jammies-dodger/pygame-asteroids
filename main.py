@@ -6,7 +6,7 @@ from asteroidfield import AsteroidField
 from player import Player
 from shot import Shot
 
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT 
+from constants import ASTEROID_MAX_RADIUS, PLAYER_RADIUS, SCREEN_WIDTH, SCREEN_HEIGHT 
 from logger import log_event
 from logger import log_state
 
@@ -48,10 +48,13 @@ def main():
         updatable.update(dt)
 
         for asteroid in asteroids:
+            #player collision
             if player.collides_with(asteroid):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+
+            #shots collision
             for shot in shots:
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")

@@ -2,11 +2,11 @@ import pygame
 
 from shot import Shot
 from circleshape import CircleShape
-from constants import LINE_WIDTH, PLAYER_RADUIS, PLAYER_SHOOT_COOLDOWN_SECONDS, PLAYER_SPEED, PLAYER_TURN_SPEED, PLAYER_SHOOT_SPEED
+from constants import LINE_WIDTH, PLAYER_RADIUS, PLAYER_SHOOT_COOLDOWN_SECONDS, PLAYER_SPEED, PLAYER_TURN_SPEED, PLAYER_SHOOT_SPEED, SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Player(CircleShape):
     def __init__(self, x, y):
-        super().__init__(x, y, PLAYER_RADUIS)
+        super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0.0
         self.shot_cd_timer = 0
     
@@ -25,6 +25,7 @@ class Player(CircleShape):
     def move(self, dt):
         direction = pygame.Vector2(0,1).rotate(self.rotation)
         self.position += direction * PLAYER_SPEED * dt
+        self.loop_back()
 
     def shoot(self):
         if(not self.shot_cd_timer > 0): 
